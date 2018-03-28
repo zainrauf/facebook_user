@@ -65,7 +65,7 @@ def generate_token_with_session_creation
   # @resource.fcm_token = params[:fcm_token] unless params[:fcm_token].blank?
   @resource.save
 
-  sign_in(:user, @resource, store: false, bypass: false)
+  sign_in(:user, @resource, store: false, bypass: true)
 
   render json: {
       status: 'success',

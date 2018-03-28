@@ -11,6 +11,8 @@ gem 'rails', '~> 5.1.5'
 gem 'devise', '~> 4.4', '>= 4.4.1'
 gem 'fb_graph2'
 gem 'devise_token_auth'
+gem 'omniauth'
+gem 'omniauth-facebook'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server

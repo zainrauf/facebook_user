@@ -8,7 +8,11 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '488ba4dce2e89b84eb1e094fd4496a2888ca5ab655fd34034b5db8c6082937ba7438c2aea4158dab184f11dd7e195c7aa3bd643f2603d4dd1d8b084ec7e276a7'
+  # config.secret_key = 'bda64177a7e0a53c04a384fb828b3119b73d5bffcf2ccdbb8d8fb372e03b0859c90b7328ae9b2caf70c017102c72f158f7fe188ba30834bafcc5c5d47c078c18'
+  
+  # ==> Controller configuration
+  # Configure the parent class to the devise controllers.
+  # config.parent_controller = 'DeviseController'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -52,7 +56,7 @@ Devise.setup do |config|
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
-  # modifying a users and when used to authenticate or find a users. Default is :email.
+  # modifying a user and when used to authenticate or find a user. Default is :email.
   config.strip_whitespace_keys = [:email]
 
   # Tell if authentication through request.params is enabled. True by default.
@@ -110,7 +114,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 11
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'cbbdb187de9160394658e5a6f030243df314c700c96e91ee1657a01a044874bbb00fcc5f66635fcc76277cc61d82f739c163c54d76b2781e3c47fa75ee38f637'
+  # config.pepper = '8ea29bd94b9f84c5b3783adc585fd1eceeacbd7bc100c006ac9f576590439a6ac5988256b0c743622a2b9354d64f26fc7de2470f90e15a1da3f054ffdf7f2105'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
