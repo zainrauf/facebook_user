@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'welcome/home'
   get "home", to: "home#index", as: "user_root"
   root 'home#index'
-  # require 'devise_token_auth'
+  require 'devise_token_auth'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   # mount_devise_token_auth_for 'User', at: 'auth'
 
