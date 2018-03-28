@@ -26,7 +26,6 @@ class Api::V1::FacebookLoginController < ApplicationController
           @user.update_attributes(provider: "facebook")
           @resource = @user
           generate_token_with_session_creation
-          # render json: {success: true, message: "You are registered successfully", data: @user}
         else
           render json: {success: false, message: "You were not registered successfully"}
         end
