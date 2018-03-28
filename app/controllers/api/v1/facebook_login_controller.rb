@@ -60,7 +60,7 @@ def generate_token_with_session_creation
 
   @resource.tokens[@client_id] = {
       token: BCrypt::Password.create(@token),
-      expiry: (Time.now + DeviseTokenAuth.token_lifespan).to_i
+      expiry: (Time.now.to_i + DeviseTokenAuth.token_lifespan.to_i).to_i
   }
   # @resource.fcm_token = params[:fcm_token] unless params[:fcm_token].blank?
   @resource.save
