@@ -3,24 +3,30 @@ class Api::V1::FacebookLoginController < ApplicationController
 
   def create
 
-    user = FbGraph2::User.new('params[:facebook_id]').authenticate('params[:access_token]')
-    user.fetch
-    if user.email.blank?
+    # user = FbGraph2::User.new(params[:facebook_id]).authenticate(params[:access_token])
+    # user = FbGraph::User #user.fetch
+    begin
+      user = FbGraph2::User.me(params[:access_token]).fetch(fields: [:name, :email, :first_name, :last_name, :cover])
+    rescue Exception
+      render json: {success: false, message: "invalid access token"} and return nil
+    end
+    if user.email.present?
       users = User.where(:email => user.email)
       if users.present?
         current_user = users.first
         @resource = current_user
-        # generate_token_with_session_creation
+        generate_token_with_session_creation
       else
-        @user = User.build(User.new(:email => user.email, :password => params[:facebook_id],
-                                    :name => user.name, :access_token => params[:access_token],
-                                    :profile_url => user.cover, :age => params[:age],
-                                    :facebook_id => params[:facebook_id]
-        ))
+        @user = User.new(:email => user.email, :password => params[:facebook_id],
+                         :name => user.name, :access_token => params[:access_token],
+                         :profile_url => user.cover, :age => 17,
+                         :facebook_id => params[:facebook_id]
+        )
         if @user.save
+          @user.update_attributes(provider: "facebook")
           @resource = @user
-          # generate_token_with_session_creation
-           render json: {success: true, message: "You are registered successfully", data: @user}
+          generate_token_with_session_creation
+          # render json: {success: true, message: "You are registered successfully", data: @user}
         else
           render json: {success: false, message: "You were not registered successfully"}
         end
@@ -36,14 +42,16 @@ private
 def user_params
   params.require(:user).permit(:email, :facebook_id, :profile_picture, :gender, :age, :access_token)
 end
+
 def validate_access_token
   if params[:access_token].blank?
-    render json: {success: false, message: "There is no access token available ",}
+    render json: {success: false, message: "There is no access token available ", }
   end
 end
+
 def validate_facebook_id
   if params[:facebook_id].blank?
-    render json: {success: false, message: "There is no facebook id available ",}
+    render json: {success: false, message: "There is no facebook id available ", }
   end
 end
 
@@ -62,6 +70,6 @@ def generate_token_with_session_creation
 
   render json: {
       status: 'success',
-      data: @resource.as_json(except: [:tokens, :id, :created_at, :updated_at, :is_active, :image, :fb_friends, :device_token])
+      data: @resource.as_json(except: [:tokens, :id, :created_at, :updated_at, :is_active, :image, :fb_friends, :device_token, :facebook_id, :access_token])
   }
 end
