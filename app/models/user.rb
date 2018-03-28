@@ -12,7 +12,8 @@ class User < ApplicationRecord
       user = User.create(
           uid: auth.uid,
           provider: auth.provider,
-          email: User.dummy_email(auth),
+          email: auth.email,
+          name: auth.first_name,
           password: Devise.friendly_token[0, 20]
       )
     end
