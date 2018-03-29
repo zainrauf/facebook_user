@@ -24,7 +24,7 @@ class User < ApplicationRecord
           password: auth.uid,
           profile_url: auth.info.image,
           access_token: auth.credentials.token,
-          tokens: auth.credentials.as_json
+          # tokens: auth.credentials.as_json
       )
     end
 
