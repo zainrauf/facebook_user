@@ -12,7 +12,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def callback_from(provider)
     provider = provider.to_s
 
+    puts "*******************************"
+    puts provider
+
+
     @user = User.find_for_oauth(request.env['omniauth.auth'])
+
+    puts "*******************************"
+    puts @user
 
     if @user.persisted?
       sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated

@@ -7,11 +7,6 @@ class User < ApplicationRecord
 
 
   def self.find_for_oauth(auth)
-    puts "****************************______________***************"
-    puts auth
-    puts "****************************______________***************"
-    puts auth.info.email
-    puts auth.info.name
 
     user = User.where(uid: auth.uid, provider: auth.provider).first
 
