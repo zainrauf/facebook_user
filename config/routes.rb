@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get "home", to: "home#index", as: "user_root"
   root 'home#index'
   # require 'devise_token_auth'
-  devise_for :users #, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
