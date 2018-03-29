@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
 
   def self.find_for_oauth(auth)
+    puts "****************************______________***************"
+    puts auth.as_json
     user = User.where(uid: auth.uid, provider: auth.provider).first
 
     unless user
@@ -20,6 +22,7 @@ class User < ApplicationRecord
     end
 
     user
+
   end
 
   def self.new_with_session(params, session)
