@@ -12,7 +12,7 @@ class User < ApplicationRecord
     puts "****************************______________***************"
     puts auth.info.email
     puts auth.info.name
-    
+
     user = User.where(uid: auth.uid, provider: auth.provider).first
 
     unless user
@@ -24,7 +24,7 @@ class User < ApplicationRecord
           password: auth.uid,
           profile_url: auth.info.image,
           access_token: auth.credentials.token,
-          tokens: auth.credentials
+          tokens: auth.credentials.as_json
       )
     end
 
