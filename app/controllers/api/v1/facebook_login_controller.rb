@@ -19,8 +19,8 @@ class Api::V1::FacebookLoginController < ApplicationController
       else
         @user = User.new(:email => user.email, :password => params[:facebook_id],
                          :name => user.name, :access_token => params[:access_token],
-                         :profile_url => user.cover, :age => 17,
-                         :facebook_id => params[:facebook_id]
+                         :profile_url => params[:profile_picture], :age => params[:age],
+                         :facebook_id => params[:facebook_id], :gender => params[:gender]
         )
         if @user.save
           @user.update_attributes(provider: "facebook")
