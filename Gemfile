@@ -8,7 +8,7 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.5'
-gem 'devise', '~> 4.4', '>= 4.4.1'
+#gem 'devise', '~> 4.4', '>= 4.4.1'
 gem 'fb_graph2'
 gem 'devise_token_auth'
 gem 'omniauth'
