@@ -8,14 +8,14 @@ class User < ApplicationRecord
 
   def self.find_for_oauth(auth)
     puts "****************************______________***************"
-    puts auth.as_json
+    puts auth
     user = User.where(uid: auth.uid, provider: auth.provider).first
 
     unless user
       user = User.create(
           uid: auth.uid,
           provider: auth.provider,
-          email: auth.email,
+          email: [auth]['info']['email'],
           name: auth.first_name,
           password: Devise.friendly_token[0, 20]
       )
